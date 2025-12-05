@@ -1,6 +1,6 @@
 import { Server } from 'socket.io';
-import { prisma } from '../config/prisma';
-import { redis, REDIS_KEYS } from '../config/redis';
+import { prisma } from '../config/prisma.js';
+import { redis, REDIS_KEYS } from '../config/redis.js';
 
 /**
  * Calculate the bid increment based on current bid amount

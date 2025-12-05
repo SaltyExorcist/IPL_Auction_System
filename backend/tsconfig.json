@@ -1,49 +1,33 @@
 {
-  // Visit https://aka.ms/tsconfig to read more about this file
   "compilerOptions": {
-    // File Layout
-     "rootDir": "./src",
-     "outDir": "./dist",
+    "rootDir": "./src",
+    "outDir": "./dist",
 
-    // Environment Settings
-    // See also https://aka.ms/tsconfig/module
-    "module": "esnext",
-    "target": "esnext",
-    "moduleResolution": "node",
+    // CHANGE 1: Update module resolution for "type": "module"
+    "module": "NodeNext",
+    "moduleResolution": "NodeNext",
+    "target": "ES2022", 
+
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "types": [],
-    // For nodejs:
-    // "lib": ["esnext"],
-    // "types": ["node"],
-    // and npm install -D @types/node
 
-    // Other Outputs
     "sourceMap": true,
     "declaration": true,
     "declarationMap": true,
 
-    // Stricter Typechecking Options
     "noUncheckedIndexedAccess": true,
     "exactOptionalPropertyTypes": true,
 
-    // Style Options
-    // "noImplicitReturns": true,
-    // "noImplicitOverride": true,
-    // "noUnusedLocals": true,
-    // "noUnusedParameters": true,
-    // "noFallthroughCasesInSwitch": true,
-    // "noPropertyAccessFromIndexSignature": true,
-
-    // Recommended Options
     "strict": true,
-    "jsx": "react-jsx",
-    "verbatimModuleSyntax": true,
-    "isolatedModules": true,
-    "noUncheckedSideEffectImports": true,
-    "moduleDetection": "force",
-    "skipLibCheck": true,
+    // "jsx": "react-jsx", // You can remove this for a backend app
+    
+    // CHANGE 2: These settings often cause issues with simple backend builds
+    // "verbatimModuleSyntax": true, // Comment this out if you still have issues
+    // "isolatedModules": true,      // Comment this out if you still have issues
+    "skipLibCheck": true
   },
+  "include": ["src/**/*"],  // CHANGE 3: Explicitly tell TS to ONLY look in src
   "exclude": [
     "node_modules",
     "dist",

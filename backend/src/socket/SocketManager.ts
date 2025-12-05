@@ -1,9 +1,9 @@
 import { Server, Socket } from 'socket.io';
 import jwt from 'jsonwebtoken';
-import { AuctionEngine } from '../services/AuctionEngine';
-import { redis, REDIS_KEYS } from '../config/redis';
-import { registerAuctionHandlers } from '../events/auction.handler';
-import type { AuthenticatedUser } from '../types/socket.types';
+import { AuctionEngine } from '../services/AuctionEngine.js';
+import { redis, REDIS_KEYS } from '../config/redis.js';
+import { registerAuctionHandlers } from '../events/auction.handler.js';
+import type { AuthenticatedUser } from '../types/socket.types.js';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'dev_secret_key_123';
 

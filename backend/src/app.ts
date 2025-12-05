@@ -3,10 +3,10 @@ import { createServer } from 'http';
 import { Server } from 'socket.io';
 import cors from 'cors';
 import dotenv from 'dotenv';
-import { setupSocket } from './socket/SocketManager';
-import { adminRoutes } from './routes/admin.routes';
-import { teamRoutes } from './routes/team.routes'; 
-import { AuthController } from './controllers/auth.controller';
+import { setupSocket } from './socket/SocketManager.js';
+import { adminRoutes } from './routes/admin.routes.js';
+import { teamRoutes } from './routes/team.routes.js'; 
+import { AuthController } from './controllers/auth.controller.js';
 
 
 dotenv.config();

@@ -1,6 +1,6 @@
 import { Server, Socket } from 'socket.io';
-import { AuctionEngine } from '../services/AuctionEngine';
-import type { AuthenticatedUser } from '../types/socket.types';
+import { AuctionEngine } from '../services/AuctionEngine.js';
+import type { AuthenticatedUser } from '../types/socket.types.js';
 
 export const registerAuctionHandlers = (
   io: Server, 
