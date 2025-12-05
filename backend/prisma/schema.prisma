@@ -1,0 +1,73 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id       String  @id @default(uuid())
+  username String  @unique
+  password String
+  role     Role    @default(BIDDER)
+  
+  // If role is BIDDER, they belong to a team
+  teamId   String? @map("team_id")
+  team     Team?   @relation(fields: [teamId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+
+  @@map("users")
+}
+
+model Team {
+  id           String   @id @default(uuid())
+  name         String
+  purseBalance Decimal  @default(5000) @map("purse_balance")
+  
+  users        User[]   // A team can have multiple managers
+  players      Player[]
+  bids         Bid[]
+  createdAt    DateTime @default(now()) @map("created_at")
+
+  @@map("teams")
+}
+
+model Player {
+  id          String   @id @default(uuid())
+  name        String
+  role        String
+  basePrice   Decimal  @map("base_price")
+  status      AuctionStatus @default(PENDING)
+  soldFor     Decimal? @map("sold_for")
+  teamId      String?  @map("team_id")
+  team        Team?    @relation(fields: [teamId], references: [id])
+  bids        Bid[]
+
+  @@map("players")
+}
+
+model Bid {
+  id        Int      @id @default(autoincrement())
+  amount    Decimal
+  timestamp DateTime @default(now())
+  teamId    String   @map("team_id")
+  team      Team     @relation(fields: [teamId], references: [id])
+  playerId  String   @map("player_id")
+  player    Player   @relation(fields: [playerId], references: [id])
+
+  @@map("bids")
+}
+
+enum Role {
+  ADMIN
+  BIDDER
+}
+
+enum AuctionStatus {
+  PENDING
+  SOLD
+  UNSOLD
+}
