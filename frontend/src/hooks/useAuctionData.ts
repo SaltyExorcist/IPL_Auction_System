@@ -12,8 +12,8 @@ export const useAuctionData = () => {
       try {
         // Fetch both teams and players in parallel
         const [teamsRes, playersRes] = await Promise.all([
-          axios.get('http://localhost:3001/api/teams'),
-          axios.get('http://localhost:3001/api/players')
+          axios.get(import.meta.env.VITE_API_URL + '/api/teams'),
+          axios.get(import.meta.env.VITE_API_URL + '/api/players')
         ]);
         
         // Update store with fetched data

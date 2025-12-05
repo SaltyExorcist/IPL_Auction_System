@@ -17,7 +17,7 @@ export const AdminPanel = () => {
 
   const fetchPending = async () => {
     try {
-      const res = await axios.get('http://localhost:3001/api/players');
+      const res = await axios.get(import.meta.env.VITE_API_URL + '/api/players');
       setPendingPlayers(res.data.filter((p: Player) => p.status === 'PENDING'));
     } catch (error) {
       console.error('Failed to fetch players');
@@ -77,7 +77,7 @@ export const AdminPanel = () => {
 
   const onSubmitPlayer = async (data: any) => {
     try {
-      await axios.post('http://localhost:3001/api/admin/players', {
+      await axios.post(import.meta.env.VITE_API_URL + '/api/admin/players', {
         ...data,
         basePrice: parseFloat(data.basePrice),
       });
