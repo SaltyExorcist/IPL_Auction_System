@@ -1,4 +1,4 @@
 node_modules/
-client/dist/
-server/dist/
+frontend/dist/
+backend/dist/
 .env
