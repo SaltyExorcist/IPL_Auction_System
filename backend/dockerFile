@@ -1,0 +1,28 @@
+# 1. Use an official Node.js runtime as a parent image
+FROM node:20-alpine
+
+# 2. Set the working directory inside the container
+WORKDIR /app
+
+# 3. Copy package.json and package-lock.json first (for better caching)
+COPY package*.json ./
+COPY prisma ./prisma/
+
+# 4. Install dependencies
+# Using 'ci' (clean install) is better for production
+RUN npm ci
+
+# 5. Generate Prisma Client
+RUN npx prisma generate
+
+# 6. Copy the rest of the application code
+COPY . .
+
+# 7. Build the TypeScript code
+RUN npm run build
+
+# 8. Expose the port the app runs on
+EXPOSE 3001
+
+# 9. Define the command to run your app
+CMD ["npm", "start"]
